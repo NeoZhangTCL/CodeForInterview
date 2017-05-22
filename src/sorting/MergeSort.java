@@ -1,17 +1,19 @@
 package sorting;
 
+import java.util.Arrays;
+
 public class MergeSort {
 
-	public static int[] mergeSort(int[] data) {
+	public static void mergeSort(int[] data) {
 		int pivot = data.length / 2 + 1;
 		int[] left = Arrays.copyOfRange(data, 0, pivot);
 		int[] right = Arrays.copyOfRange(data, pivot, data.length);
-		while(left.length > 1) { left=mergeSort(left); }
-		while(right.length > 1) { right=mergeSort(right); }
-		return merge(data, left, right);
+		while(left.length > 1) { mergeSort(left); }
+		while(right.length > 1) { mergeSort(right); }
+		merge(data, left, right);
 	}
 
-	public static int[] merge(int[] data, int[] left, int[] right) {
+	public static void merge(int[] data, int[] left, int[] right) {
 		int ptr, i, j;
 		ptr = i = j = 0;
 		while(left.length != i || right.length != j){
