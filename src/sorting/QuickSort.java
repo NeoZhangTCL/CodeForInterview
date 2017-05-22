@@ -6,24 +6,45 @@ public class QuickSort {
 		quickSort(data, 0, data.length-1);
 	}
 
-	public static void quickSort(int[] data, int i, int j) {
-		int pivot = data[0];
-		i++;
-		while (i<j) {
-			int left = data[i];
-			int right = data[j];
-			if (right<pivot && left>pivot){
-				int temp = right;
-				right = left;
-				left = temp;
-			}
-			if (left<pivot) i++;
-			if (right>pivot) j--;
+	public static void quickSort(int[] data, int left, int right) {
+		int i = hoarePartition(data, left, right);
+		if(i-1>left) quickSort(data, left, i-1);
+		if(i+1<right) quickSort(data, i+1, right);
+	}
+	
+	public static int lomutoPartition(int[] data, int left, int right) {
+	    int pivot = data[right];
+	    int i = left - 1;    
+	    for (int j=left; j<right; j++) {
+	    	if (data[j]<=pivot) {
+	    		i = i + 1;
+	    		if (i != j){
+		    	    swap(data, i, j);
+	    		}
+	    	}	
+	    }
+	    swap(data,++i,right);
+	    return i;
+	}
+	
+	public static int hoarePartition(int[] data, int left, int right) {
+		int pivot = data[left];
+		int i = left+1;
+		int j = right-1;
+		while (true){
+			do{ i++; }while(i<data.length && data[i]<pivot);
+			do{ j--; }while(j>=0 && data[j]>pivot);
+			if (i>=j) swap(data, i, j);
+			return j;	
 		}
-		quickSort(data, 1, i-1);
-		quickSort(data, j+1, data.length-1);
 	}
 
+	public static void swap(int[] data, int i, int j){
+	    int temp = data[i];
+	    data[i] = data[j];
+	    data[j] = temp;
+	} 
+	
 	public static void main(String[] args) {
 		int[] data = new int[]{3,1,23,8,4,6,7,776,879,29,3,434,56,878,9};
 		quickSort(data);
