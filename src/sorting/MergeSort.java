@@ -2,13 +2,14 @@ package sorting;
 
 public class MergeSort {
 
-	public static void mergeSort(int[] data) {
-		int[] left = data
+	public static int[] mergeSort(int[] data) {
+		int pivot = data.length / 2 + 1;
+		int[] left = Arrays.copyOfRange(data, 0, pivot);
+		int[] right = Arrays.copyOfRange(data, pivot, data.length);
+		while(left.length > 1) { left=mergeSort(left); }
+		while(right.length > 1) { right=mergeSort(right); }
+		return merge(data, left, right);
 	}
-
-	public static void partition(int[] data) {
-
-	} 
 
 	public static int[] merge(int[] data, int[] left, int[] right) {
 		int ptr, i, j;
