@@ -30,12 +30,15 @@ public class QuickSort {
 	public static int hoarePartition(int[] data, int left, int right) {
 		int pivot = data[left];
 		int i = left+1;
-		int j = right-1;
-		while (true){
-			do{ i++; }while(i<data.length && data[i]<pivot);
-			do{ j--; }while(j>=0 && data[j]>pivot);
-			if (i>=j) swap(data, i, j);
-			return j;	
+		int j = right;
+		while (true) {
+			while(i<=right && data[i]<pivot){ i++; } 
+			while(j>=left+1 && data[j]>pivot){ j--; }
+			if(i>=j){ 
+				swap(data, left, j);
+				return j; 
+			}
+			swap(data, i, j);
 		}
 	}
 
