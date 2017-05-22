@@ -5,18 +5,18 @@ import java.util.Arrays;
 public class MergeSort {
 
 	public static void mergeSort(int[] data) {
-		int pivot = data.length / 2 + 1;
+		int pivot = data.length / 2;
 		int[] left = Arrays.copyOfRange(data, 0, pivot);
 		int[] right = Arrays.copyOfRange(data, pivot, data.length);
-		while(left.length > 1) { mergeSort(left); }
-		while(right.length > 1) { mergeSort(right); }
+		if(left.length > 1) { mergeSort(left); }
+		if(right.length > 1) { mergeSort(right); }
 		merge(data, left, right);
 	}
 
 	public static void merge(int[] data, int[] left, int[] right) {
 		int ptr, i, j;
 		ptr = i = j = 0;
-		while(left.length != i || right.length != j){
+		while(left.length != i && right.length != j){
 			if (left[i]<=right[j]) data[ptr++] = left[i++];
 			else data[ptr++] = right[j++];
 		}
